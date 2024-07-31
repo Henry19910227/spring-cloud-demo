@@ -1,0 +1,35 @@
+version: "2.4"
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: cloud-demo-mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - cloud-demo-network
+    environment:
+      - MYSQL_DATABASE=cloud-demo
+      - MYSQL_ROOT_PASSWORD=aaaa8027
+      - MYSQL_USER=henry
+      - MYSQL_PASSWORD=aaaa8027
+  redis:
+    image: redis:7.0.1
+    ports:
+      - "6379:6379"
+    networks:
+      - cloud-demo-network
+    container_name: cloud-demo-redis
+#  minio:
+#    image: quay.io/minio/minio
+#    container_name: minio
+#    ports:
+#      - "9000:9000"
+#      - "9001:9001"
+#    environment:
+#      MINIO_ROOT_USER: root
+#      MINIO_ROOT_PASSWORD: aaaa8027
+#    command: server /data --console-address ":9001"
+
+networks:
+  cloud-demo-network:
+    driver: bridge
