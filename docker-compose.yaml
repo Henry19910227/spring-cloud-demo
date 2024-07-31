@@ -19,6 +19,15 @@ services:
     networks:
       - cloud-demo-network
     container_name: cloud-demo-redis
+  consul:
+    image: consul:1.15.4
+    container_name: cloud-demo-consul
+    ports:
+      - "8500:8500"   # Consul Web UI
+      - "8600:8600"   # DNS interface
+    networks:
+      - cloud-demo-network
+    command: agent -server -bootstrap-expect=1 -client=0.0.0.0 -ui
 #  minio:
 #    image: quay.io/minio/minio
 #    container_name: minio
